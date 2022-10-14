@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contatos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome');
-            $table->string('email');
+        Schema::table('livros', function (Blueprint $table) {
             $table->string('editora');
-            $table->string('telefone');
-            $table->string('cidade');
-            $table->string('estado');
-            $table->timestamps();
         });
     }
 
@@ -32,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contatos');
+        Schema::table('livros', function (Blueprint $table) {
+            $table->dropColumn('editora');
+        });
     }
 };

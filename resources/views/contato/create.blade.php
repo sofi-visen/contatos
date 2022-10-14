@@ -9,7 +9,7 @@
         {{Form::text('nome', '', ['class'=>'form-control', 'required', 
         'placeholder' =>'Nome completo'])}}
         {{Form::label('email', 'e-mail')}}
-        {{Form::text('email', '', ['class'=>'form-control', 'required', 
+        {{Form::email('email', '', ['class'=>'form-control', 'required', 
         'placeholder' =>'E-mail'])}}
         {{Form::label('telefone', 'Telefone')}}
         {{Form::text('telefone', '', ['class'=>'form-control', 'required', 

@@ -39,4 +39,5 @@
 </table> 
 <h5>novo contato</h5>
 <a class="btn btn-primary" href="{{url('contatos/create')}}">Criar</a> 
+      {{$contatos->links()}}  
         @endsection

@@ -39,4 +39,5 @@
 </table> 
 <h5>novo livro</h5>
 <a class="btn btn-primary" href="{{url('livros/create')}}">Criar</a> 
+        {{$livros->links()}}
         @endsection

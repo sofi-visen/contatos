@@ -15,7 +15,7 @@ class LivrosController extends Controller
      */
     public function index()
     {
-        $livros = Livro::all();
+        $livros = Livro::paginate(5);
         return view('livro.index',array('livros' => $livros,'busca'=>null));
     }
 

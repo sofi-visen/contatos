@@ -58,7 +58,14 @@ class ContatosController extends Controller
         $contato->cidade = $request->input('cidade');
         $contato->estado = $request->input('estado');
         if($contato->save()){
+            if($request->hasFile('foto')){
+                $imagem = $request->file('foto');
+                $nomearquivo = md5($contato->id).".".$imagem->getClientOriginalExtension();
+                //dd($imagem, $nomearquivo,$contato->id);
+                $request->file('foto')->move(public_path('.\img\contatos'),$nomearquivo);
+            }
             return redirect('contatos');
+            
         }
     }
 
@@ -96,6 +103,11 @@ class ContatosController extends Controller
     public function update(Request $request, $id)
     {
         $contato = Contato::find($id);
+        if($request->hasFile('foto')){
+            $imagem = $request->file('foto');
+            $nomearquivo = md5($contato->id).".".$imagem->getClientOriginalExtension();
+            $request->file('foto')->move(public_path('.\img\contatos'),$nomearquivo);
+        }
         $contato->nome = $request->input('nome');
         $contato->email = $request->input('email');
         $contato->telefone = $request->input('telefone');
@@ -103,7 +115,7 @@ class ContatosController extends Controller
         $contato->estado = $request->input('estado');
         if($contato->save()){
             Session::flash('mensagem', 'Contato alterado com sucesso');
-            return redirect()->back();
+            return redirect(url('contatos/'));
     }
     }
     /**

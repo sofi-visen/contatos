@@ -56,6 +56,11 @@ class LivrosController extends Controller
         $livro->editora = $request->input('editora');
         $livro->ano = $request->input('ano');
         if($livro->save()) {
+            if($request->hasFile('foto')){
+                $imagem = $request->file('foto');
+                $nomearquivo = md5($livro->id).".".$imagem->getClientOriginalExtension();
+                $request->file('foto')->move(public_path('.\img\livros'),$nomearquivo);
+            }
             return redirect('livros');
         }
     }
@@ -94,6 +99,11 @@ class LivrosController extends Controller
     public function update(Request $request, $id)
     {
         $livro = Livro::find($id);
+        if($request->hasFile('foto')){
+            $imagem = $request->file('foto');
+            $nomearquivo = md5($livro->id).".".$imagem->getClientOriginalExtension();
+            $request->file('foto')->move(public_path('.\img\livros'),$nomearquivo);
+        }
         $livro->titulo = $request->input('titulo');
         $livro->descricao = $request->input('descricao');
         $livro->autor = $request->input('autor');

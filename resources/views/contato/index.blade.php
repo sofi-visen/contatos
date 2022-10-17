@@ -4,7 +4,7 @@
 <br>
     <h1>Listagem de Contatos</h1>
    @if(Session::has('mensagem'))
-        <div class="alert alert-info">
+        <div class="alert alert-success">
             {{Session::get('mensagem')}}
         </div>
     @endif 

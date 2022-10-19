@@ -1,21 +1,21 @@
 @extends('layout.app')
-@section('title','Listagem de Contatos')
+@section('title','emprestimo de Livros')
 @section('content')
 <br>
-    <h1>Listagem de Contatos</h1>
+    <h1>Empréstimos</h1>
    @if(Session::has('mensagem'))
-        <div class="alert alert-success">
+        <div class="alert alert-info">
             {{Session::get('mensagem')}}
         </div>
     @endif 
     <br>
-    {{Form::open(['url'=>'contatos/buscar', 'method'=>'GET'])}}
+    {{Form::open(['url'=>'emprestimos/buscar', 'method'=>'GET'])}}
     <div class="row">
         <div class="col-sm-3">
             <div class="input-group">
                 @if($busca !== null)
                 &nbsp;<a class="btn btn-info" href="{{url
-                    ('contatos/')}}">Todos</a>&nbsp;
+                    ('emprestimos/')}}">Todos</a>&nbsp;
                     @endif
             {{Form::text('busca', $busca, ['class'=>'form-control',
                 'required', 'placeholder'=>'buscar'])}}
@@ -29,15 +29,24 @@
             {{Form::close()}}
             <br><br>
   <table class="table table-striped">
-    @foreach ($contatos as $contato)
+    @foreach ($emprestimos as $emprestimo)
     <tr>
-       <td><a href="{{url('contatos/'.$contato->id)}}">
-            {{$contato->nome}}</a>
+       <td><a href="{{url('emprestimo/'.$emprestimo->id)}}">
+            {{$emprestimo->id}}</a>
     </td>
-        @endforeach
+    <td>
+            {{$emprestimo->contato_id}}</a>
+    </td>
+    <td>
+            {{$emprestimo->livro_id}}</a>
+    </td>
+    <td>
+            {{$emprestimo->datahora}}</a>
+    </td>    
     </tr>
+    @endforeach
 </table> 
-<h5>Novo Contato</h5>
-<a class="btn btn-primary" href="{{url('contatos/create')}}">Criar</a> 
-      {{$contatos->links()}}  
+<h5>Novo Empréstimo</h5>
+<a class="btn btn-primary" href="{{url('emprestimos/create')}}">Criar</a> 
+        {{$emprestimos->links()}}
         @endsection

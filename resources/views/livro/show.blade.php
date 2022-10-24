@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('title','Livro - '.$livro->titulo)
 @section('content')
-    <div class="card w-50">
+    <div class="card w-50  m-auto">
         @php
             $nomeimagem = "";
             if(file_exists("./img/livros/".md5($livro->id).".jpg")) {

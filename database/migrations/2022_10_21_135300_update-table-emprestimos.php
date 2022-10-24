@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('emprestimos', function(Blueprint $table){
-            $table->datetime('datadevolucao') ->nullable()->change();
+            $table->text('obs')->nullable()->default(null)->change();
         });
     }
 

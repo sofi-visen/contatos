@@ -8,10 +8,23 @@
         'enctype'=>'multipart/form-data'])}}
         {{Form::label('contato_id', 'Contato')}}
         {{Form::text('contato_id', '', ['class'=>'form-control', 'required', 
-        'placeholder' =>'contato'])}}    
+        'placeholder' =>'selecione um contato',
+         'list'=>'listcontatos'])}} 
+         <datalist id='listcontatos'>
+            @foreach($contatos as $contato)  
+            <option value="{{$contato->id}}">{{$contato->nome}}</option>
+            @endforeach
+        </datalist>
+
         {{Form::label('livro_id', 'Livro')}}
         {{Form::text('livro_id', '', ['class'=>'form-control', 'required', 
-        'placeholder' =>'livro'])}}       
+        'placeholder' =>'selecione um livro', 'list'=>'listlivros'])}}
+        <datalist id="listlivros">
+            @foreach($livros as $livro)
+            <option value="{{$livro->id}}">{{$livro->titulo}}</option>
+            @endforeach
+        </datalist>   
+
         {{Form::label('datahora', 'Data')}}
         {{Form::text('datahora', \Carbon\Carbon::now()
         ->format('d/m/Y H:i:s'),

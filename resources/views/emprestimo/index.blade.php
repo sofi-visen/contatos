@@ -29,20 +29,31 @@
             {{Form::close()}}
             <br><br>
   <table class="table table-striped">
+    <tr>
+    <th>ID</th>
+    <th>Contato</th>
+    <th>Livro</th>
+    <th>Data</th>
+    <th>Devolução</th>
+    </tr>
     @foreach ($emprestimos as $emprestimo)
     <tr>
-       <td><a href="{{url('emprestimo/'.$emprestimo->id)}}">
+       <td><a href="{{url('emprestimos/'.$emprestimo->id)}}">
             {{$emprestimo->id}}</a>
     </td>
     <td>
-            {{$emprestimo->contato_id}}</a>
+            {{$emprestimo->contato_id}} -
+            {{$emprestimo->contato->nome}}
     </td>
     <td>
-            {{$emprestimo->livro_id}}</a>
+            {{$emprestimo->livro_id}} -
+            {{$emprestimo->livro->titulo}}
     </td>
     <td>
-            {{$emprestimo->datahora}}</a>
+          
+            {{\Carbon\Carbon::create($emprestimo->datahora)->format('d/m/Y H:i:s')}}
     </td>    
+    <td>{!!$emprestimo->devolvido!!}</td>
     </tr>
     @endforeach
 </table> 

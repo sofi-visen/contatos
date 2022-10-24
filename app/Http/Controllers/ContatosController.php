@@ -25,12 +25,10 @@ class ContatosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function buscar(Request $request){
-        $contatos = Contato::where('nome', 'LIKE', '%'.$request->input
-        ('busca').'%')->orwhere('email', 'LIKE', '%'.$request->input
-        ('busca').'%')->get();
-        return view('contato.index',array('contatos'=>$contatos,
-        'busca'=>$request->input('busca')));
+    public function buscar(Request $request) {
+        $contatos = Contato::where('nome','LIKE','%'.$request->input('busca').'%')
+        ->orwhere('email','LIKE','%'.$request->input('busca').'%')->paginate(5);
+        return view('contato.index',array('contatos' => $contatos,'busca'=>$request->input('busca')));
     }
 
     /**
@@ -73,12 +71,12 @@ class ContatosController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Contato $contato
      */
     public function show($id)
     {
         $contatos = Contato::find($id);
-        return view('contato.show', array('contato'=> $contatos));
+        return view('contato.show', array('contato'=> $contatos, 'busca'=>null));
     }
 
     /**

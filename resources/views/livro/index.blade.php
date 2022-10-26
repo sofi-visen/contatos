@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('title','Listagem de Livros')
 @section('content')
 <br>
@@ -38,6 +38,10 @@
     </tr>
 </table> 
 <h5>Novo Livro</h5>
-<a class="btn btn-primary" href="{{url('livros/create')}}">Criar</a> 
-        {{$livros->links()}}
+        @if ((Auth::check()) && (Auth::user()->isAdmin()))
+                <div class="col-sm-3">
+                    <a class="btn btn-primary" href="{{url('livros/create')}}">Criar</a>
+                </div>
+        @endif  
+        {{$livros->links()}}  
         @endsection

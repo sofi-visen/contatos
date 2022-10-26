@@ -16,10 +16,7 @@ use App\Http\Controllers\EmprestimosController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::get('contatos/buscar',[ContatosController::class,'buscar']);
 Route::resource('contatos',ContatosController::class);
@@ -33,3 +30,6 @@ Route::resource('emprestimos',EmprestimosController::class);
 Route::get('emprestimos/buscar',[EmprestimosController::class,'buscar']);
 Route::put('emprestimos/{emprestimo}/devolver',[EmprestimosController::class,'devolver'])->name('emprestimos.devolver');
 Route::resource('emprestimos',EmprestimosController::class);
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

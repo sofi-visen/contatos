@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('title','Contato - '.$contato->nome)
 @section('content')
     <div class="card w-50  m-auto">
@@ -33,14 +33,18 @@
                 Estado: {{$contato->estado}}</p>
         </div>
         <div class="card-footer">
-            {{Form::open(['route' => ['contatos.destroy',$contato->id],'method' => 'DELETE'])}}
-            @if ($nomeimagem !== "./img/contatos/semfoto.webp")
-               {{Form::hidden('foto',$nomeimagem)}}
+        @if ((Auth::check()) && (Auth::user()->isAdmin()))
+                {{Form::open(['route' => ['contatos.destroy',$contato->id],'method' => 'DELETE'])}}
+                @if ($nomeimagem !== "./img/contatos/semfoto.webp")
+                {{Form::hidden('foto',$nomeimagem)}}
+                @endif
+                <a href="{{url('contatos/'.$contato->id.'/edit')}}" class="btn btn-warning">Alterar</a>
+                {{Form::submit('Excluir',['class'=>'btn btn-danger','onclick'=>'return confirm("Confirma exclusão?")'])}}
             @endif
-            <a href="{{url('contatos/'.$contato->id.'/edit')}}" class="btn btn-warning">Alterar</a>
-            {{Form::submit('Excluir',['class'=>'btn btn-danger','onclick'=>'return confirm("Confirma exclusão?")'])}}
-            <a href="{{url('contatos/')}}" class="btn btn-success">Voltar</a>
-            {{Form::close()}}
+                <a href="{{url('contatos/')}}" class="btn btn-success">Voltar</a>
+                @if ((Auth::check()) && (Auth::user()->isAdmin()))
+                {{Form::close()}}
+            @endif
         </div>
     </div>
 @endsection

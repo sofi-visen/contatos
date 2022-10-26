@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('title','emprestimo de Livros')
 @section('content')
 <br>
@@ -58,6 +58,10 @@
     @endforeach
 </table> 
 <h5>Novo Empréstimo</h5>
-<a class="btn btn-primary" href="{{url('emprestimos/create')}}">Criar</a> 
-        {{$emprestimos->links()}}
+        @if ((Auth::check()) && (Auth::user()->isAdmin()))
+        <div class="col-sm-3">
+        <a class="btn btn-primary" href="{{url('emprestimos/create')}}">Criar</a>
+        </div>
+        @endif
+        {{$emprestimos->links()}}  
         @endsection

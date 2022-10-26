@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('title','Criar novo Livro')
 @section('content')
 <br>

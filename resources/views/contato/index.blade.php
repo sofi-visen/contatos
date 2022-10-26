@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('title','Listagem de Contatos')
 @section('content')
 <br>
@@ -38,6 +38,10 @@
     </tr>
 </table> 
 <h5>Novo Contato</h5>
-<a class="btn btn-primary" href="{{url('contatos/create')}}">Criar</a> 
+@auth
+                <div class="col-sm-3">
+                    <a class="btn btn-primary" href="{{url('contatos/create')}}">Criar</a>
+                </div>
+            @endauth
       {{$contatos->links()}}  
         @endsection

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('title','Livro - '.$livro->titulo)
 @section('content')
     <div class="card w-50  m-auto">
@@ -33,14 +33,18 @@
                 Ano: {{$livro->ano}}</p>
         </div>
         <div class="card-footer">
+        @if ((Auth::check()) && (Auth::user()->isAdmin()))
             {{Form::open(['route' => ['livros.destroy',$livro->id],'method' => 'DELETE'])}}
             @if ($nomeimagem !== "./img/livros/semfoto.jpg")
                {{Form::hidden('foto',$nomeimagem)}}
             @endif
             <a href="{{url('livros/'.$livro->id.'/edit')}}" class="btn btn-warning">Alterar</a>
             {{Form::submit('Excluir',['class'=>'btn btn-danger','onclick'=>'return confirm("Confirma exclusão?")'])}}
+            @endif
             <a href="{{url('livros/')}}" class="btn btn-success">Voltar</a>
+            @if ((Auth::check()) && (Auth::user()->isAdmin()))
             {{Form::close()}}
+            @endif
         </div>
     </div>
 @endsection
